@@ -4,9 +4,8 @@ module.exports = function(yaImages) {
 
 
         $scope.showResults = function(query){
-            queryModel.search(query);
             $scope.query = '';
-            $location.path('/images/');
+            $location.path('/images/' + encodeURIComponent(query));
         };
 
         $scope.queryHistory = (function(){
@@ -15,23 +14,9 @@ module.exports = function(yaImages) {
                 result = [];
             while (i--){
                 var query = keys[i].split('-')[1];
-                result.push(query)
+                result.push(query);
             }
             return result;
-
         })();
-
-        function getAllStorage() {
-
-            var archive = {}, 
-                keys = Object.keys(localStorage),
-                i = keys.length;
-
-            while ( i-- ) {
-                archive[ keys[i] ] = localStorage.getItem( keys[i] );
-            }
-            console.log(archive)
-            return archive;
-        }
     });
 };

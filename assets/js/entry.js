@@ -17,7 +17,7 @@ yaImages.config(function($routeProvider){
             controller: 'searchPageCtrl',
             activeTab: 'searchPage'
         })
-        .when('/images/', {
+        .when('/images/:query', {
             template: require('./components/images/template.html'),
             controller: 'imagesCtrl',
             activeTab: 'images'
@@ -28,7 +28,7 @@ yaImages.config(function($routeProvider){
             controller: 'settingsCtrl',
             activeTab: 'settings'
         })
-        .otherwise('/')
+        //.otherwise('/')
 });
 
 yaImages.controller('mainCtrl', function($scope, $location){
