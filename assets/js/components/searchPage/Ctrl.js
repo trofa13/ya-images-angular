@@ -8,15 +8,9 @@ module.exports = function(yaImages) {
             $location.path('/images/' + encodeURIComponent(query));
         };
 
-        $scope.queryHistory = (function(){
-            var keys = Object.keys(localStorage),
-                i = keys.length,
-                result = [];
-            while (i--){
-                var query = keys[i].split('-')[1];
-                result.push(query);
-            }
-            return result;
-        })();
+        $scope.queryHistory = JSON.parse(localStorage.getItem('responses'));
+
+        
+
     });
 };

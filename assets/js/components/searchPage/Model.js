@@ -1,39 +1,17 @@
 module.exports = function(yaImages) {
-	yaImages.factory('queryModel', function($http) {
+	yaImages.factory('queryModel', function($http,  $q) {
 
 	var service = {};
 
-/*		service.search = function(query){
-			if (localStorage.getItem('response-' + query)){
-				console.log('query already have been done');
-				service.response = JSON.parse(localStorage.getItem('response-' + query));
-			} else {
-				$http({
-					method: 'GET',
-					url: './api/response.json'
-				}).then(function successCallback(response) {
-						handleResponse(response.data);
-						localStorage.setItem('response-' + query,  JSON.stringify(response.data));
-					}, function errorCallback(response) {
-						console.warn('Error:', response);
-				});
-
-				function handleResponse(data){
-					service.response = data;
-				}
-			}
-		}*/
-
-
-		//decodeUriComponent
 		service.search = function(query){
-
-			if (localStorage.getItem('response-' + query)){
+/*
+			if (localStorage.getItem('responses')){
 				console.log('query already have been done');
 
-				service.response = JSON.parse(localStorage.getItem('response-' + query));
-			} else {
-				$http({
+				//JSON.parse(localStorage.getItem('response-' + query));
+			} */
+				return $q(function(resolve){
+					$http({
 					method: 'GET',
 					url: 'http://localhost:3001/?search=' + query
 					//url: 'https://crossorigin.me/https://yandex.ru/images/search?format=json&request=%5B%7B%22block%22%3A%22serp-controller%22%2C%22params%22%3A%7B%7D%2C%22version%22%3A2%7D%2C%7B%22block%22%3A%22serp-list_infinite_yes%22%2C%22params%22%3A%7B%7D%2C%22version%22%3A2%7D%2C%7B%22block%22%3A%22more_direction_next%22%2C%22params%22%3A%7B%7D%2C%22version%22%3A2%7D%2C%7B%22block%22%3A%22gallery__items%3Aajax%22%2C%22params%22%3A%7B%7D%2C%22version%22%3A2%7D%5D&p=1&text=' + query
@@ -41,20 +19,37 @@ module.exports = function(yaImages) {
 						var result = JSON.stringify(response.data).match(/"img_href\\":\\".+?"/g),
 							finalResult = [];
 
-						for (var i=0; i < result.length; i++){
+						for (let i=0; i < result.length; i++){
 							if(result[i].match(/http.+.jpg/) !== null){
 								finalResult.push(result[i].match(/http.+.jpg/)[0]);
 							}
 						}
-						service.response = finalResult;
-						localStorage.setItem('response-' + query,  JSON.stringify(finalResult));
 
+						var lsItem = [];
+						if (localStorage.getItem('responses')){
 
+							var lsArr = JSON.parse(localStorage.getItem('responses'));
+							
+							//Check if current query is already in the LocalStorage
+							if (lsArr.indexOf(query) !== -1){
+								lsItem = lsArr;
+							} else {
+								lsItem = lsArr;
+								lsItem.push(query);
+							}
+
+						} else {
+							lsItem.push(query);
+						}
+						
+						localStorage.setItem('responses',  JSON.stringify(lsItem));
+
+						resolve(finalResult);
 					}, function errorCallback (response){
 						console.info('Error: ', response)
+					})
 				})
-			}
-			return service.response;
+			
 		}
 
 

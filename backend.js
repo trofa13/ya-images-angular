@@ -1,4 +1,4 @@
-var Parser, request, config, url;
+var Parser, request, config;
  
 // npm dependencies 
 Parser  = require("jq-html-parser");
@@ -9,21 +9,19 @@ var cors = require('cors');
 app.use(cors());
  
 // config, etc. 
-config = {
+/*config = {
   image: {
     selector: "img",
     //attribute: "style",
     //regexp: "url\\(([\/A-z0-9]+.png)\\)"
   }
 };
-url = "https://yandex.ru/images/search?format=json&request=%5B%7B%22block%22%3A%22serp-controller%22%2C%22params%22%3A%7B%7D%2C%22version%22%3A2%7D%2C%7B%22block%22%3A%22serp-list_infinite_yes%22%2C%22params%22%3A%7B%7D%2C%22version%22%3A2%7D%2C%7B%22block%22%3A%22more_direction_next%22%2C%22params%22%3A%7B%7D%2C%22version%22%3A2%7D%2C%7B%22block%22%3A%22gallery__items%3Aajax%22%2C%22params%22%3A%7B%7D%2C%22version%22%3A2%7D%5D&p=1&text=";
+*/
 
 
-//'https://yandex.ru/images/search?text='
 
 
-//"https://yandex.ru/images/search?format=json&request=%5B%7B%22block%22%3A%22serp-controller%22%2C%22params%22%3A%7B%7D%2C%22version%22%3A2%7D%2C%7B%22block%22%3A%22serp-list_infinite_yes%22%2C%22params%22%3A%7B%7D%2C%22version%22%3A2%7D%2C%7B%22block%22%3A%22more_direction_next%22%2C%22params%22%3A%7B%7D%2C%22version%22%3A2%7D%2C%7B%22block%22%3A%22gallery__items%3Aajax%22%2C%22params%22%3A%7B%7D%2C%22version%22%3A2%7D%5D&p=1&text=";
- 
+
 // request a page 
 /*request.get(url, function(err, res, body){
  
@@ -44,15 +42,15 @@ url = "https://yandex.ru/images/search?format=json&request=%5B%7B%22block%22%3A%
 });*/
 
 app.get('/', function(req, res){
-  var requestText = req.query.search;
-      url += requestText;
+  var requestText = req.query.search,
+      url = "https://yandex.ru/images/search?format=json&request=%5B%7B%22block%22%3A%22serp-controller%22%2C%22params%22%3A%7B%7D%2C%22version%22%3A2%7D%2C%7B%22block%22%3A%22serp-list_infinite_yes%22%2C%22params%22%3A%7B%7D%2C%22version%22%3A2%7D%2C%7B%22block%22%3A%22more_direction_next%22%2C%22params%22%3A%7B%7D%2C%22version%22%3A2%7D%2C%7B%22block%22%3A%22gallery__items%3Aajax%22%2C%22params%22%3A%7B%7D%2C%22version%22%3A2%7D%5D&p=1&text=" + requestText;
     request.get(url, function(err, resp, body){
         if(err || (resp.statusCode != 200)){
           return console.log("An error occured.");
       }
-
+/*
       var parser = new Parser(config),
-          result = parser.parse(body);
+          result = parser.parse(body);*/
       res.send(body);
     })
     
