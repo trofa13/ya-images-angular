@@ -4,6 +4,7 @@ const angular = require('angular');
                 require('angular-sanitize');
                 require('angular-route');
                 require('angular-resource');
+                //require('./russky.js');
 
 
 const yaImages = angular.module('yaImages', [
@@ -15,27 +16,31 @@ yaImages.config(function($routeProvider){
         .when('/', {
             template: require('./components/searchPage/template.html'),
             controller: 'searchPageCtrl',
-            activeTab: 'searchPage'
+            activeTab: 'searchPage',
+            controllerAs: 'searchCtrl'
         })
         .when('/images/:query', {
             template: require('./components/images/template.html'),
             controller: 'imagesCtrl',
-            activeTab: 'images'
-
+            activeTab: 'images',
+            controllerAs: 'imagesCtrl'
         })
         .when('/settings/', {
             template: require('./components/settings/template.html'),
             controller: 'settingsCtrl',
-            activeTab: 'settings'
+            activeTab: 'settings',
+            controllerAs: 'settingsCtrl'
         })
-        //.otherwise('/')
+        .otherwise({
+            redirectTo: '/'
+        })
 });
 
 yaImages.controller('mainCtrl', function($scope, $location){
         $scope.isActive = function(route) {
             return route === $location.path();
-        }
-})
+        };
+});
 
 
 

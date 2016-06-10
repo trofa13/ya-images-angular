@@ -1,14 +1,15 @@
 module.exports = function(yaImages) {
-    yaImages.controller('imagesCtrl', function($rootScope, $scope, queryModel, sizeModel, $routeParams) {
+    yaImages.controller('imagesCtrl', function($rootScope, $scope, imagesModel, sizeModel, $routeParams) {
+        var self = this;
 
  
-        queryModel.search(decodeURIComponent($routeParams.query)).then(function(response){
-            $scope.response = response;
+        imagesModel.search(decodeURIComponent($routeParams.query)).then(function(response){
+            self.response = response;
         });
 
 
         $scope.$watch('sizeModel.sizes', function(){
-            $scope.sizes = sizeModel.sizes;
+            self.sizes = sizeModel.sizes;
         });
     });
 };

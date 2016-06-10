@@ -1,6 +1,6 @@
 <h2>Settings</h2>
 
 <label>Change image size</label>
-<select ng-model="size" ng-change="changeSize(size)">
-  <option ng-repeat="size in imageSize" value="{{size}}">{{size}}</option> <!-- interpolation -->
+<select ng-model="size" ng-change="settingsCtrl.changeSize(size)">
+  <option ng-repeat="size in settingsCtrl.imageSize" value="{{size}}">{{size}}</option> <!-- interpolation -->
 </select>

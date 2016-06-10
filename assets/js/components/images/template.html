@@ -1,8 +1,8 @@
 <h2>Images</h2>
 
 <ul class="image-list">
-  <li ng-repeat="responseUrl in response">
-    <div class="response-image" style="background-image:url('{{responseUrl}}'); width:{{sizes[0]}}px; height: {{sizes[1]}}px; ">
+  <li ng-repeat="responseUrl in imagesCtrl.response">
+    <div class="response-image" style="background-image:url('{{responseUrl}}'); width:{{imagesCtrl.sizes[0]}}px; height: {{imagesCtrl.sizes[1]}}px; ">
 
     </div>
   </li>

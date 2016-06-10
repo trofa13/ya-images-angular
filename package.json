@@ -4,7 +4,7 @@
   "description": "This is just my tryouts with angular and so on",
   "main": "index.js",
   "scripts": {
-    "test": "test",
+    "test": "karma start --reporters html,dots",
     "start": "webpack-dev-server --colors --harmony --history-api-fallback --inline"
   },
   "repository": {
@@ -23,6 +23,8 @@
   "homepage": "https://github.com/trofa13/angular-trello#readme",
   "devDependencies": {
     "angular": "^1.5.6",
+    "angular-mock": "^1.0.0",
+    "angular-mocks": "^1.5.6",
     "angular-resource": "^1.5.6",
     "angular-route": "^1.5.6",
     "angular-sanitize": "^1.5.6",
@@ -39,8 +41,16 @@
     "image-webpack-loader": "^1.8.0",
     "jade": "^1.11.0",
     "jade-loader": "^0.8.0",
+    "jasmine-core": "^2.4.1",
     "jq-html-parser": "^0.3.0",
+    "karma": "^0.13.22",
+    "karma-babel-preprocessor": "^6.0.1",
+    "karma-chrome-launcher": "^1.0.1",
+    "karma-html-reporter": "^0.2.7",
+    "karma-jasmine": "^1.0.2",
+    "karma-webpack": "^1.7.0",
     "nib": "^1.1.0",
+    "protractor": "^3.3.0",
     "raw-loader": "^0.5.1",
     "request": "^2.72.0",
     "stylus": "^0.54.5",

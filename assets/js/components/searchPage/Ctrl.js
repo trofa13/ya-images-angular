@@ -1,16 +1,14 @@
 module.exports = function(yaImages) {
     yaImages.controller('searchPageCtrl', function($rootScope, $scope, $location, queryModel) {
-        $scope.query = '';
+        this.query = '';
 
 
-        $scope.showResults = function(query){
-            $scope.query = '';
+        this.showResults = function(query){
+            this.query = '';
             $location.path('/images/' + encodeURIComponent(query));
         };
 
-        $scope.queryHistory = JSON.parse(localStorage.getItem('responses'));
-
+        this.queryHistory = JSON.parse(localStorage.getItem('responses'));
         
-
     });
 };
